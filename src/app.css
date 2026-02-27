@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+
+@font-face {
+    font-family: 'Okta Neue';
+    src: url('/fonts/OktaNeue-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Okta Neue';
+    src: url('/fonts/OktaNeue-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Okta Neue';
+    src: url('/fonts/OktaNeue-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Okta Neue';
+    src: url('/fonts/OktaNeue-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Okta Neue';
+    src: url('/fonts/OktaNeue-Normal.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Okta Neue';
+    src: url('/fonts/OktaNeue-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Okta Neue';
+    src: url('/fonts/OktaNeue-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    font-family: 'Okta Neue', sans-serif;
+}
