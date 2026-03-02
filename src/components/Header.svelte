@@ -4,9 +4,10 @@
 	import { fly } from 'svelte/transition';
 
 	let tabs = [
-		{ name: 'Проекты', link: '/projects' },
-		{ name: 'О нас', link: '#AboutUsSection' },
-		{ name: 'Контакты', link: '/contacts' }
+		{ name: 'Projects', link: '/projects' },
+		{ name: 'About', link: '#AboutUsSection' },
+		{ name: 'Services', link: '#' },
+		{ name: 'Contacts', link: '/contacts' }
 	];
 
 	let menuOpen = false;
@@ -20,7 +21,7 @@
 	const displayedTabs = derived(page, ($page) => {
 		const path = $page.url.pathname;
 
-		let result = path !== '/' ? [{ name: 'Главная', link: '/' }, ...tabs] : tabs;
+		let result = path !== '/' ? [{ name: 'Home', link: '/' }, ...tabs] : tabs;
 
 		return result;
 	});

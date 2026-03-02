@@ -26,10 +26,10 @@
 					<i class="fas fa-phone text-lg"></i>
 				</div>
 				<a
-					href="tel:+74956642272"
+					href="#"
 					class="text-center text-2xl transition-colors hover:text-orange-500 md:text-left"
 				>
-					+7 (495) 664-22-72
+					+9...
 				</a>
 			</div>
 
@@ -46,8 +46,8 @@
 					rel="noopener noreferrer"
 					class="text-center text-xl leading-snug transition-colors hover:text-orange-500 md:text-left"
 				>
-					Москва<br />
-					1-й Магистральный тупик, 5А
+					110017, New Delhi, 1 Eldeco Centre <br>
+					Malviya Nagar, Block A, Shivalik Colony
 				</a>
 			</div>
 
@@ -62,7 +62,7 @@
 					href="mailto:info@vitopro.ru"
 					class="text-center text-2xl transition-colors hover:text-orange-500 md:text-left"
 				>
-					info@vitopro.ru
+					main@vitoteam.in
 				</a>
 			</div>
 		</div>

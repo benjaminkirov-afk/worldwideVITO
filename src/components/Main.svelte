@@ -214,30 +214,124 @@
 
 <!-- About Us Section -->
 <section
-	bind:this={aboutSection}
-	id="AboutUsSection"
-	class="flex w-full flex-col items-center justify-center bg-white px-6 py-20 md:flex-row md:items-center md:justify-center md:gap-x-12 md:px-12 md:py-28"
+  bind:this={aboutSection}
+  id="AboutUsSection"
+  class="flex w-full flex-col items-center justify-center bg-white px-6 py-20 md:flex-row md:items-center md:justify-between md:gap-x-12 lg:gap-x-20 md:px-12 md:py-28"
 >
-	{#if showAbout}
-		<div
-			class="flex flex-col items-center text-center md:w-1/2"
-			in:fly={{ x: 0, y: 50, duration: 1000, delay: 200 }}
-		>
-			<img
-				src="/images/Igor_Vernik.jpg"
-				alt="Игорь Верник"
-				loading="lazy"
-				class="mb-6 h-72 w-72 rounded-full object-cover shadow-lg md:h-80 md:w-80"
-				on:error={(e) => console.warn('Failed to load about image')}
-			/>
-			<h2 class="mb-10 text-3xl font-medium text-[#252728] sm:text-4xl md:text-5xl">
-				Агентство <span class="text-[#EB5B25]">событий</span> <br />для бизнеса
-			</h2>
-			<p class="text-base font-normal text-[#616060] sm:text-lg md:text-[20px]">
-				Мы тут делаем события так, чтобы они запоминались. Берём идею, докручиваем её, собираем команду - и превращаем всё в живую историю, которая работает на бренд и людей. Честно, мы просто любим своё дело и делаем так, чтобы всем было хорошо - и организаторам, и гостям.
-			</p>
-		</div>
-	{/if}
+  {#if showAbout}
+    <!-- Фото слева -->
+    <div
+      class="mb-10 md:mb-0 md:w-5/12 lg:w-2/5 flex justify-center md:justify-end"
+      in:fly={{ x: -60, y: 0, duration: 900, delay: 100 }}
+    >
+      <img
+        src="/images/event.jpg"
+        alt="event"
+        loading="lazy"
+        class="object-cover rounded-2xl shadow-lg 
+               h-64 w-64 
+               sm:h-72 sm:w-72 
+               md:h-80 md:w-80 
+               lg:h-96 lg:w-96 
+               transition-all duration-300 
+               hover:shadow-xl hover:scale-[1.02]"
+        on:error={(e) => console.warn('Failed to load about image')}
+      />
+    </div>
+
+    <!-- Текст справа -->
+<div
+  class="flex flex-col items-center text-center md:items-start md:text-left md:w-7/12 lg:w-3/5 max-w-3xl"
+  in:fly={{ x: 60, y: 0, duration: 900, delay: 300 }}
+>
+  <h2 class="mb-6 sm:mb-8 text-3xl font-semibold text-[#252728] sm:text-4xl md:text-4xl lg:text-5xl leading-tight">
+    Global Experience.
+    <br class="hidden sm:inline" />
+    <span class="text-[#eb5b25]">Local Soul.</span> 
+  </h2>
+  <p class="text-base leading-relaxed text-[#616060] sm:text-lg md:text-xl lg:text-[20px]">
+    We don’t just organize events — we create unforgettable experiences. With decades of expertise, we deliver precision, passion, and excellence in every detail: from project management and production to premium client service. We put our heart into every project.
+    <br class="my-4 sm:my-6" />
+    Now, we’re bringing this passion to India. Our new branch in New Delhi marks an exciting new chapter — sharing our expertise with international and local brands. We help you tell your story, connect across cultures, and impress with world-class quality. If you’re looking for more than an organizer — a true partner who cares — we’re here to make it happen.
+  </p>
+</div>
+  {/if}
+</section>
+
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 md:mb-16 text-gray-900 tracking-tight">
+      Our Services
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      
+      <!-- Card 1 -->
+      <div class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100/70 flex flex-col overflow-hidden">
+        <div class="h-40 bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-8">
+          <svg class="w-20 h-20 text-[#EB5B25] drop-shadow-md transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+        </div>
+        <div class="p-7 flex flex-col flex-grow">
+          <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gray-900 group-hover:text-[#EB5B25] transition-colors">
+            Full-Cycle Event Management & Production
+          </h3>
+          <ul class="space-y-3 text-gray-600 text-base leading-relaxed flex-grow">
+            <li>• End-to-end project management from concept to execution.</li>
+            <li>• High-tech production (lighting, sound, booths, stage design).</li>
+            <li>• Theming, décor & immersive environments.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100/70 flex flex-col overflow-hidden">
+        <div class="h-40 bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-8">
+          <svg class="w-20 h-20 text-[#EB5B25] drop-shadow-md transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <circle cx="12" cy="10" r="3" />
+            <path d="M8 18h8 M12 13v5" />
+          </svg>
+        </div>
+        <div class="p-7 flex flex-col flex-grow">
+          <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gray-900 group-hover:text-[#EB5B25] transition-colors">
+            Corporate & Private Events
+          </h3>
+          <ul class="space-y-3 text-gray-600 text-base leading-relaxed flex-grow">
+            <li>• Conferences, forums, product launches.</li>
+            <li>• Incentive trips & team-building.</li>
+            <li>• Private celebrations, birthdays, anniversaries.</li>
+            <li>• Gala dinners & award ceremonies.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100/70 flex flex-col overflow-hidden">
+        <div class="h-40 bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-8">
+          <svg class="w-20 h-20 text-[#EB5B25] drop-shadow-md transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M2 12h20 M12 2v20" />
+          </svg>
+        </div>
+        <div class="p-7 flex flex-col flex-grow">
+          <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gray-900 group-hover:text-[#EB5B25] transition-colors">
+            Cross-Cultural & MICE Services
+          </h3>
+          <ul class="space-y-3 text-gray-600 text-base leading-relaxed flex-grow">
+            <li>• Support for Russian clients in India.</li>
+            <li>• Assistance for Indian clients in Russia.</li>
+            <li>• Full hospitality & logistics for delegates.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
 <!-- Projects Section -->
@@ -245,7 +339,7 @@
 	{#if showProjects}
 		<div in:fly={{ y: 50, duration: 1000 }}>
 			<div class="mb-8 text-center">
-				<h2 class="mb-2 text-3xl font-medium text-white sm:text-4xl md:text-5xl">Наши проекты</h2>
+				<h2 class="mb-2 text-3xl font-medium text-white sm:text-4xl md:text-5xl">Our projects</h2>
 			</div>
 
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -275,7 +369,7 @@
 					href="/projects"
 					class="rounded-xl border border-white px-8 py-4 text-lg font-medium text-white transition hover:bg-white hover:text-black"
 				>
-					Показать все проекты
+					All projects
 				</a>
 			</div>
 		</div>
@@ -291,7 +385,7 @@
 	{#if showLetters}
 		<div in:fly={{ y: 50, duration: 1000 }}>
 			<h2 class="mb-10 text-center text-3xl font-medium text-[#0E1113] sm:text-4xl md:text-5xl">
-				Что о нас говорят клиенты
+				Clients testimonials
 			</h2>
 			<div class="mx-auto mb-10 h-1 w-32 rounded bg-[#EB5B25]"></div>
 

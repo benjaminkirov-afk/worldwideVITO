@@ -49,10 +49,10 @@
 
 <section class="mx-auto max-w-6xl px-4 py-16 pb-6">
 	<h2 class="mt-10 mb-2 text-center text-4xl font-medium text-white" in:fade={{ duration: 800 }}>
-		Наши проекты
+		Our projects
 	</h2>
 	<p class="mb-2 text-center font-light text-white" in:fade={{ duration: 800, delay: 200 }}>
-		Каждая история — это решение конкретной задачи нашего клиента
+		Every story is a solution to a specific client challenge
 	</p>
 </section>
 
