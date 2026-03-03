@@ -258,165 +258,172 @@
   {/if}
 </section>
 
-<section class="py-16 md:py-24 bg-white">
+<section class="py-20 md:py-28 bg-white">
   <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-    <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 md:mb-16 text-gray-900 tracking-tight">
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-16 md:mb-20 text-[#252728] tracking-tight">
       Our Services
     </h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
 
       <!-- Card 1 -->
-      <div class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100/70 flex flex-col overflow-hidden">
-        <div class="relative h-56 overflow-hidden">
-          <img 
-            src="images/service-1.jpg" 
+      <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden border border-gray-100/60">
+        <div class="relative h-64 overflow-hidden">
+          <img
+            src="cards/card1.png"
             alt="Full-Cycle Event Management"
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
           />
-          <div class="absolute inset-0 bg-black/50 transition-opacity duration-300 group-hover:bg-black/40"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500"></div>
+          
           <div class="absolute inset-0 flex items-center justify-center">
-            <svg class="w-16 h-16 text-white drop-shadow-xl transition-transform duration-300 group-hover:scale-110"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
+            <div class="p-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 group-hover:scale-110 group-hover:bg-[#EB5B25]/80 transition-all duration-500">
+              <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        <div class="p-7 flex flex-col flex-grow">
-          <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gray-900 group-hover:text-[#EB5B25] transition-colors">
-            Full-Cycle Event Management & Production
+        <div class="p-8 flex flex-col">
+          <h3 class="text-2xl font-semibold text-[#252728] mb-5 group-hover:text-[#EB5B25] transition-colors duration-400">
+            Full-Cycle Event Production
           </h3>
-          <ul class="space-y-3 text-gray-600 text-base leading-relaxed flex-grow">
-            <li>• End-to-end project management from concept to execution.</li>
-            <li>• High-tech production (lighting, sound, booths, stage design).</li>
-            <li>• Theming, décor & immersive environments.</li>
+          <ul class="space-y-3 text-[#616060] text-[15px] leading-relaxed">
+            <li>• Concept → flawless execution</li>
+            <li>• Premium AV, lighting & stage design</li>
+            <li>• Immersive theming & décor</li>
           </ul>
         </div>
       </div>
 
       <!-- Card 2 -->
-      <div class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100/70 flex flex-col overflow-hidden">
-        <div class="relative h-56 overflow-hidden">
-          <img 
-            src="images/service-2.jpg" 
+      <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden border border-gray-100/60">
+        <div class="relative h-64 overflow-hidden">
+          <img
+            src="cards/card2.png"
             alt="Corporate & Private Events"
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
           />
-          <div class="absolute inset-0 bg-black/50 transition-opacity duration-300 group-hover:bg-black/40"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500"></div>
           <div class="absolute inset-0 flex items-center justify-center">
-            <svg class="w-16 h-16 text-white drop-shadow-xl transition-transform duration-300 group-hover:scale-110"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <rect x="4" y="4" width="16" height="16" rx="2" />
-              <circle cx="12" cy="10" r="3" />
-              <path d="M8 18h8 M12 13v5" />
-            </svg>
+            <div class="p-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 group-hover:scale-110 group-hover:bg-[#EB5B25]/80 transition-all duration-500">
+              <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="4" y="4" width="16" height="16" rx="2" />
+                <circle cx="12" cy="10" r="3" />
+                <path d="M8 18h8 M12 13v5" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        <div class="p-7 flex flex-col flex-grow">
-          <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gray-900 group-hover:text-[#EB5B25] transition-colors">
+        <div class="p-8 flex flex-col">
+          <h3 class="text-2xl font-semibold text-[#252728] mb-5 group-hover:text-[#EB5B25] transition-colors duration-400">
             Corporate & Private Events
           </h3>
-          <ul class="space-y-3 text-gray-600 text-base leading-relaxed flex-grow">
-            <li>• Conferences, forums, product launches.</li>
-            <li>• Incentive trips & team-building.</li>
-            <li>• Private celebrations, birthdays, anniversaries.</li>
-            <li>• Gala dinners & award ceremonies.</li>
+          <ul class="space-y-3 text-[#616060] text-[15px] leading-relaxed">
+            <li>• Conferences & product launches</li>
+            <li>• Incentive trips & team-building</li>
+            <li>• Gala dinners & private celebrations</li>
           </ul>
         </div>
       </div>
 
       <!-- Card 3 -->
-      <div class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100/70 flex flex-col overflow-hidden">
-        <div class="relative h-56 overflow-hidden">
-          <img 
-            src="images/service-3.jpg" 
-            alt="Cross-Cultural & MICE Services"
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden border border-gray-100/60">
+        <div class="relative h-64 overflow-hidden">
+          <img
+            src="cards/card3.png"
+            alt="Cross-Cultural & MICE"
+            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
           />
-          <div class="absolute inset-0 bg-black/50 transition-opacity duration-300 group-hover:bg-black/40"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500"></div>
           <div class="absolute inset-0 flex items-center justify-center">
-            <svg class="w-16 h-16 text-white drop-shadow-xl transition-transform duration-300 group-hover:scale-110"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M2 12h20 M12 2v20" />
-            </svg>
+            <div class="p-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 group-hover:scale-110 group-hover:bg-[#EB5B25]/80 transition-all duration-500">
+              <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M2 12h20 M12 2v20" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        <div class="p-7 flex flex-col flex-grow">
-          <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gray-900 group-hover:text-[#EB5B25] transition-colors">
-            Cross-Cultural & MICE Services
+        <div class="p-8 flex flex-col">
+          <h3 class="text-2xl font-semibold text-[#252728] mb-5 group-hover:text-[#EB5B25] transition-colors duration-400">
+            Cross-Cultural & MICE
           </h3>
-          <ul class="space-y-3 text-gray-600 text-base leading-relaxed flex-grow">
-            <li>• Support for Russian clients in India.</li>
-            <li>• Assistance for Indian clients in Russia.</li>
-            <li>• Full hospitality & logistics for delegates.</li>
+          <ul class="space-y-3 text-[#616060] text-[15px] leading-relaxed">
+            <li>• Russia ↔ India delegate support</li>
+            <li>• Full logistics & hospitality</li>
+            <li>• Cultural bridging & VIP handling</li>
           </ul>
         </div>
       </div>
 
-      <!-- Centering for the last 2 cards -->
-      <div class="lg:col-span-3 flex justify-center">
-        <div class="lg:grid lg:grid-cols-2 lg:gap-8">
+      <!-- Две нижние карточки – центрированные -->
+      <div class="md:col-span-2 lg:col-span-3 flex justify-center">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-10 max-w-4xl w-full">
 
-          <!-- Card 4 - VIP & Concierge Services -->
-          <div class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100/70 flex flex-col overflow-hidden">
-            <div class="relative h-56 overflow-hidden">
-              <img 
-                src="images/service-4.jpg" 
-                alt="VIP & Concierge Services"
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          <!-- Card 4 -->
+          <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden border border-gray-100/60">
+            <div class="relative h-64 overflow-hidden">
+              <img
+                src="cards/card4.png"
+                alt="VIP & Concierge"
+                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
-              <div class="absolute inset-0 bg-black/50 transition-opacity duration-300 group-hover:bg-black/40"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500"></div>
               <div class="absolute inset-0 flex items-center justify-center">
-                <svg class="w-16 h-16 text-white drop-shadow-xl transition-transform duration-300 group-hover:scale-110"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M12 2l3 7h7l-5.5 4.2L18 21l-6-4-6 4 1.5-7.8L2 9h7z"/>
-                </svg>
+                <div class="p-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 group-hover:scale-110 group-hover:bg-[#EB5B25]/80 transition-all duration-500">
+                  <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2l3 7h7l-5.5 4.2L18 21l-6-4-6 4 1.5-7.8L2 9h7z"/>
+                  </svg>
+                </div>
               </div>
             </div>
-            <div class="p-7 flex flex-col flex-grow">
-              <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gray-900 group-hover:text-[#EB5B25] transition-colors">
-                VIP & Concierge Services
+
+            <div class="p-8 flex flex-col">
+              <h3 class="text-2xl font-semibold text-[#252728] mb-5 group-hover:text-[#EB5B25] transition-colors duration-400">
+                VIP & Concierge
               </h3>
-              <ul class="space-y-3 text-gray-600 text-base leading-relaxed flex-grow">
-                <li>• High-end guest experience management.</li>
-                <li>• VIP transportation and logistics.</li>
-                <li>• Personal shopping and exclusive cultural experiences in India and Russia.</li>
+              <ul class="space-y-3 text-[#616060] text-[15px] leading-relaxed">
+                <li>• Ultra-premium guest experience</li>
+                <li>• Private transfers & logistics</li>
+                <li>• Exclusive cultural immersions</li>
               </ul>
             </div>
           </div>
 
-          <!-- Card 5 - Art & Creative Direction -->
-          <div class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100/70 flex flex-col overflow-hidden">
-            <div class="relative h-56 overflow-hidden">
-              <img 
-                src="images/service-5.jpg" 
+          <!-- Card 5 -->
+          <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden border border-gray-100/60">
+            <div class="relative h-64 overflow-hidden">
+              <img
+                src="cards/card5.png"
                 alt="Art & Creative Direction"
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
-              <div class="absolute inset-0 bg-black/50 transition-opacity duration-300 group-hover:bg-black/40"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500"></div>
               <div class="absolute inset-0 flex items-center justify-center">
-                <svg class="w-16 h-16 text-white drop-shadow-xl transition-transform duration-300 group-hover:scale-110"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <circle cx="12" cy="12" r="3"/>
-                  <path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/>
-                </svg>
+                <div class="p-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 group-hover:scale-110 group-hover:bg-[#EB5B25]/80 transition-all duration-500">
+                  <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/>
+                  </svg>
+                </div>
               </div>
             </div>
-            <div class="p-7 flex flex-col flex-grow">
-              <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gray-900 group-hover:text-[#EB5B25] transition-colors">
-                Art & Creative Direction
+
+            <div class="p-8 flex flex-col">
+              <h3 class="text-2xl font-semibold text-[#252728] mb-5 group-hover:text-[#EB5B25] transition-colors duration-400">
+                Creative Direction & Art
               </h3>
-              <ul class="space-y-3 text-gray-600 text-base leading-relaxed flex-grow">
-                <li>• Curation of talent and artists.</li>
-                <li>• Concept development and creative direction.</li>
-                <li>• Custom entertainment programs.</li>
+              <ul class="space-y-3 text-[#616060] text-[15px] leading-relaxed">
+                <li>• Artist & talent curation</li>
+                <li>• Concept & visual storytelling</li>
+                <li>• Bespoke entertainment programs</li>
               </ul>
             </div>
           </div>
