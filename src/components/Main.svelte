@@ -245,9 +245,9 @@
   in:fly={{ x: 60, y: 0, duration: 900, delay: 300 }}
 >
   <h2 class="mb-6 sm:mb-8 text-3xl font-semibold text-[#252728] sm:text-4xl md:text-4xl lg:text-5xl leading-tight">
-    Global Experience.
+    Global Experience
     <br class="hidden sm:inline" />
-    <span class="text-[#eb5b25]">Local Soul.</span> 
+    <span class="text-[#eb5b25]">Local Soul</span> 
   </h2>
   <p class="text-base leading-relaxed text-[#616060] sm:text-lg md:text-xl lg:text-[20px]">
     We don’t just organize events — we create unforgettable experiences. With decades of expertise, we deliver precision, passion, and excellence in every detail: from project management and production to premium client service. We put our heart into every project.
