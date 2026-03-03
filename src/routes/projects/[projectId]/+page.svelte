@@ -51,12 +51,12 @@
 			<div>
 				<h1 class="text-4xl font-semibold">{project.title}</h1>
 				<p class="mt-4 text-lg opacity-90">
-					<span class="font-medium">Заказчик:</span> {project.customer} |
-					<span class="font-medium">Тип:</span> {project.type} |
-					<span class="font-medium">Локация:</span> {project.location}
+					<span class="font-medium">Customer:</span> {project.customer} |
+					<span class="font-medium">Type:</span> {project.type} |
+					<span class="font-medium">Location:</span> {project.location}
 
 					{#if Number(project.clients) > 0}
-						| <span class="font-medium">Участников:</span> {project.clients}
+						| <span class="font-medium">Members:</span> {project.clients}
 					{/if}
 				</p>
 			</div>
@@ -67,7 +67,7 @@
 	{#if project.gallery.length}
 		<section class="w-full bg-white px-4 py-12">
 			<h2 class="mb-8 text-center text-4xl font-semibold text-[#252728]">
-				Галерея проекта
+				Project Gallery
 			</h2>
 
 			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
