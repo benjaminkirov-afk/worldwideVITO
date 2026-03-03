@@ -194,7 +194,7 @@
 >
 	<div
 		class="absolute inset-0 bg-cover bg-center"
-		style="background-image: url('/images/hero.png');"
+		style="background-image: url('images/hero.png');"
 	></div>
 	<div class="absolute inset-0 bg-black/75"></div>
 
