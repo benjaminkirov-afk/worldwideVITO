@@ -6,7 +6,6 @@
 	let tabs = [
 		{ name: 'Projects', link: '/projects' },
 		{ name: 'About', link: '#AboutUsSection' },
-		{ name: 'Services', link: '#' },
 		{ name: 'Contacts', link: '/contacts' }
 	];
 

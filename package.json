@@ -39,6 +39,7 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
-		"dotenv": "^17.2.3"
+		"dotenv": "^17.2.3",
+		"maplibre-gl": "^5.19.0"
 	}
 }

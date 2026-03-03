@@ -2,65 +2,69 @@
 	import { fly } from 'svelte/transition';
 </script>
 
-<div class="relative min-h-screen">
-	<div in:fly={{ y: 50, duration: 800, delay: 100 }} class="absolute inset-0">
-		<img
-			src="https://static.maps.2gis.com/1.0?s=1280x1280@2x&center=37.53227,55.766105&zoom=16"
-			alt="2GIS Map"
-			class="h-full w-full object-cover grayscale filter"
-		/>
-	</div>
+<div class="relative min-h-screen overflow-hidden">
+	<!-- Статичная карта (серая) -->
+	<img
+		src="/test.png"
+		alt="Карта офиса Vito Team в Malviya Nagar, New Delhi"
+		class="absolute inset-0 h-full w-full object-cover grayscale"
+	/>
 
-	<div class="absolute inset-0 bg-black/20"></div>
-	<div class="absolute inset-0 bg-gradient-to-l from-black/80 via-black/40 to-transparent"></div>
+	<!-- Лёгкий оверлей -->
+	<div class="absolute inset-0 bg-black/30 pointer-events-none" />
 
+	<!-- Контакты с единым стилем текста -->
 	<div
-		class="relative z-10 flex min-h-screen items-center justify-center px-6 md:justify-end md:pr-20"
+		class="relative z-20 flex min-h-screen items-center justify-center px-5 sm:px-8 md:justify-end md:pr-16 lg:pr-24"
 	>
-		<div class="flex w-full max-w-md flex-col gap-8 text-white">
+		<div class="w-full max-w-md lg:max-w-lg flex flex-col gap-8 text-white">  <!-- уменьшил gap с 10 на 8 -->
+
+			<!-- Телефон -->
 			<div
-				in:fly={{ x: 50, duration: 600, delay: 300 }}
-				class="flex flex-col items-center gap-2 md:flex-row md:items-center"
+				in:fly={{ x: 60, duration: 700, delay: 200 }}
+				class="flex items-center gap-4 bg-black/40 px-6 py-4 rounded-2xl border border-white/10 shadow-xl"
 			>
-				<div class="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white">
-					<i class="fas fa-phone text-lg"></i>
+				<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-orange-500 bg-black/50">
+					<i class="fas fa-phone text-lg text-orange-500" />  <!-- чуть уменьшил иконку -->
 				</div>
 				<a
-					href="#"
-					class="text-center text-2xl transition-colors hover:text-orange-500 md:text-left"
+					href="tel:+919876543210"
+					class="text-2xl md:text-2.5xl font-medium transition-colors hover:text-orange-400"
 				>
-					+9...
+					+91 987 654 32 10
 				</a>
 			</div>
 
+			<!-- Адрес — коротко, тот же font-medium -->
 			<div
-				in:fly={{ x: 50, duration: 600, delay: 500 }}
-				class="flex flex-col items-center gap-2 md:flex-row md:items-start"
+				in:fly={{ x: 60, duration: 700, delay: 400 }}
+				class="flex items-start gap-4 bg-black/40 px-6 py-4 rounded-2xl border border-white/10 shadow-xl"
 			>
-				<div class="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white">
-					<i class="fas fa-map-marker-alt text-lg"></i>
+				<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-orange-500 bg-black/50">
+					<i class="fas fa-map-marker-alt text-lg text-orange-500" />
 				</div>
 				<a
-					href="https://yandex.ru/maps/?text=г.%20Москва,%201-й%20магистральный%20тупик,%205A"
+					href="https://www.openstreetmap.org/search?query=28.534%2C77.212"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-center text-xl leading-snug transition-colors hover:text-orange-500 md:text-left"
+					class="text-lg md:text-xl font-medium leading-tight transition-colors hover:text-orange-400"
 				>
-					110017, New Delhi, 1 Eldeco Centre <br>
-					Malviya Nagar, Block A, Shivalik Colony
+					New Delhi, 110017<br />
+					Malviya Nagar, 1 Eldeco Centre
 				</a>
 			</div>
 
+			<!-- Email — тот же font-medium -->
 			<div
-				in:fly={{ x: 50, duration: 600, delay: 700 }}
-				class="flex flex-col items-center gap-2 md:flex-row md:items-center"
+				in:fly={{ x: 60, duration: 700, delay: 600 }}
+				class="flex items-center gap-4 bg-black/40 px-6 py-4 rounded-2xl border border-white/10 shadow-xl"
 			>
-				<div class="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white">
-					<i class="fas fa-envelope text-lg"></i>
+				<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-orange-500 bg-black/50">
+					<i class="fas fa-envelope text-lg text-orange-500" />
 				</div>
 				<a
-					href="mailto:info@vitopro.ru"
-					class="text-center text-2xl transition-colors hover:text-orange-500 md:text-left"
+					href="mailto:main@vitoteam.in"
+					class="text-2xl md:text-2.5xl font-medium transition-colors hover:text-orange-400"
 				>
 					main@vitoteam.in
 				</a>
