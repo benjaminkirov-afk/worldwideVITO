@@ -51,14 +51,22 @@
 			<div>
 				<h1 class="text-4xl font-semibold">{project.title}</h1>
 				<p class="mt-4 text-lg opacity-90">
-					<span class="font-medium">Customer:</span> {project.customer} |
-					<span class="font-medium">Type:</span> {project.type} |
-					<span class="font-medium">Location:</span> {project.location}
-
-					{#if Number(project.clients) > 0}
-						| <span class="font-medium">Members:</span> {project.clients}
-					{/if}
-				</p>
+	{#if project.customer}
+		<span class="font-medium">Customer:</span> {project.customer}
+	{/if}
+	{#if project.type}
+		{#if project.customer} | {/if}
+		<span class="font-medium">Type:</span> {project.type}
+	{/if}
+	{#if project.location}
+		{#if project.customer || project.type} | {/if}
+		<span class="font-medium">Location:</span> {project.location}
+	{/if}
+	{#if Number(project.clients) > 0}
+		{#if project.customer || project.type || project.location} | {/if}
+		<span class="font-medium">Members:</span> {project.clients}
+	{/if}
+</p>
 			</div>
 		</div>
 	</section>
