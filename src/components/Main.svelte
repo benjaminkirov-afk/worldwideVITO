@@ -78,21 +78,21 @@
 	// ── Services data ─────────────────────────────────────────────
 	const topCards = [
 		{
-			img: 'cards/card1.png',
+			img: 'cards/card01.jpg',
 			alt: 'Full-Cycle Event Production',
 			title: 'Full-Cycle Event Production',
 			items: ['Concept → flawless execution', 'Premium AV, lighting & stage design', 'Immersive theming & décor'],
 			icon: `<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>`
 		},
 		{
-			img: 'cards/card2.png',
+			img: 'cards/card02.jpg',
 			alt: 'Corporate & Private Events',
 			title: 'Corporate & Private Events',
 			items: ['Conferences & product launches', 'Incentive trips & team-building', 'Gala dinners & private celebrations'],
 			icon: `<rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M8 18h8M12 13v5"/>`
 		},
 		{
-			img: 'cards/card3.png',
+			img: 'cards/card03.jpg',
 			alt: 'Cross-Cultural & MICE',
 			title: 'Cross-Cultural & MICE',
 			items: ['Russia ↔ India delegate support', 'Full logistics & hospitality', 'Cultural bridging & VIP handling'],
@@ -109,7 +109,7 @@
 			icon: `<path d="M12 2l3 7h7l-5.5 4.2L18 21l-6-4-6 4 1.5-7.8L2 9h7z"/>`
 		},
 		{
-			img: 'cards/card5.png',
+			img: 'cards/card05.jpg',
 			alt: 'Creative Direction & Art',
 			title: 'Creative Direction & Art',
 			items: ['Artist & talent curation', 'Concept & visual storytelling', 'Bespoke entertainment programs'],
