@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { cubicOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
+	import { supabase } from '$lib/supabase';
 
 	function fadeUp(node, { delay = 0, duration = 500 }) {
 		return {
@@ -18,32 +19,17 @@
 	let projects = [];
 
 	onMount(async () => {
-		const WP_BASE_URL = 'https://admin.vitopro.ru';
+		const { data, error } = await supabase
+			.from('projects')
+			.select('id, title, type, cover_url')
+			.order('created_at', { ascending: false });
 
-		const res = await fetch(
-			`${WP_BASE_URL}/wp-json/wp/v2/project?per_page=100&orderby=date&order=desc
-`
-		);
+		if (error) {
+			console.error(error);
+			return;
+		}
 
-		const data = await res.json();
-
-		projects = await Promise.all(
-			data.map(async (p) => {
-				let cover = null;
-				if (p.acf.cover_image) {
-					const coverRes = await fetch(`${WP_BASE_URL}/wp-json/wp/v2/media/${p.acf.cover_image}`);
-					if (coverRes.ok) cover = await coverRes.json();
-				}
-
-				return {
-					title: p.title.rendered,
-					slug: p.slug,
-					type: p.acf.type || '',
-					image: cover?.source_url || '/placeholder.png',
-					alt: cover?.alt_text || p.title.rendered
-				};
-			})
-		);
+		projects = data;
 	});
 </script>
 
@@ -59,14 +45,14 @@
 <section class="w-full px-4 pb-8">
 	<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
 		{#each projects as project, i}
-			<a
-				href={`/projects/${project.slug}`}
+			
+				<a href={`/projects/${project.id}`}
 				class="group relative overflow-hidden rounded-2xl shadow-lg transition-transform duration-300 hover:scale-102"
 				in:fadeUp={{ duration: 800, delay: i * 100 }}
 			>
 				<img
-					src={project.image}
-					alt={project.alt}
+					src={project.cover_url || '/placeholder.png'}
+					alt={project.title}
 					class="h-100 w-full object-cover transition-transform duration-500 group-hover:scale-110"
 					loading="lazy"
 				/>
