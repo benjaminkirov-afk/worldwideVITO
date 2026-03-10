@@ -304,13 +304,13 @@
 				<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:gap-7">
 					{#each visibleProjects as project}
 						
-							<a href={`/projects/${project.slug}`}
+							<a href={`/projects/${project.id}`}
 							class="group relative block overflow-hidden rounded-xl shadow-md
 							       transition-shadow duration-300 hover:shadow-2xl"
 						>
 							<img
-								src={project.src}
-								alt={project.alt}
+								src={project.cover_url || '/placeholder.png'}
+								alt={project.title}
 								loading="lazy"
 								class="h-64 w-full object-cover transition-transform duration-500
 								       group-hover:scale-105 sm:h-72 md:h-80 xl:h-96"
@@ -338,65 +338,6 @@
 						All projects
 					</a>
 				</div>
-			</div>
-
-		</div>
-	{/if}
-</section>
-
-<!-- ── Testimonials ───────────────────────────────────────────────── -->
-<section
-	bind:this={testimonialsSection}
-	id="TestimonialsSection"
-	class="bg-white px-6 py-16 sm:py-20 md:py-24 xl:py-32"
->
-	{#if showTestimonials}
-		<div in:fly={{ y: 40, duration: 800 }}>
-
-			<h2 class="mb-3 text-center text-2xl font-medium text-[#0E1113]
-			           sm:text-3xl lg:text-4xl xl:text-5xl">
-				Clients Testimonials
-			</h2>
-			<div class="mx-auto mb-12 h-0.5 w-16 rounded-full bg-[#EB5B25]
-			            sm:mb-14 sm:w-20 xl:mb-16 xl:w-24"></div>
-
-			<div class="mx-auto grid max-w-6xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3
-			            xl:max-w-[90rem] xl:gap-8">
-				{#each testimonials as t, i}
-					<div
-						in:fly={{ y: 30, duration: 500, delay: i * 80 }}
-						class="flex flex-col rounded-xl border border-gray-100 bg-white p-5 sm:p-6 xl:p-8
-						       shadow-[0_2px_16px_rgba(0,0,0,0.06)] transition-shadow duration-300
-						       hover:shadow-[0_6px_24px_rgba(235,91,37,0.12)]"
-					>
-						<svg class="mb-3 h-7 w-7 text-[#EB5B25] opacity-30 xl:h-9 xl:w-9" viewBox="0 0 24 24" fill="currentColor">
-							<path d="M7.17 17c.51 0 .98-.29 1.2-.74l1.42-2.84A1 1 0 0 0 9.5 12H7V7H2v5.5C2 15.54 4.46 17 7.17 17zm11 0c.51 0 .98-.29 1.2-.74l1.42-2.84A1 1 0 0 0 20.5 12H18V7h-5v5.5c0 3.04 2.46 4.5 5.17 4.5z"/>
-						</svg>
-
-						<p class="mb-5 flex-grow text-sm leading-relaxed text-gray-500 xl:text-base xl:leading-loose">
-							{t.text}
-						</p>
-
-						<div class="mb-4 h-px bg-gray-100"></div>
-
-						<div class="flex items-center gap-3">
-							<div class="h-9 w-9 flex-shrink-0 overflow-hidden rounded-full border border-[#EB5B25]/25
-							            xl:h-12 xl:w-12">
-								{#if t.avatar}
-									<img src={t.avatar} alt={t.name} class="h-full w-full object-cover" />
-								{:else}
-									<div class="flex h-full w-full items-center justify-center bg-[#EB5B25]/10 text-xs font-bold text-[#EB5B25] xl:text-sm">
-										{t.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
-									</div>
-								{/if}
-							</div>
-							<div>
-								<p class="text-sm font-semibold leading-tight text-[#0E1113] xl:text-base">{t.name}</p>
-								<p class="mt-0.5 text-xs text-gray-400 xl:text-sm">{t.position}</p>
-							</div>
-						</div>
-					</div>
-				{/each}
 			</div>
 
 		</div>
