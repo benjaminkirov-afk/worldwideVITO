@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Sarah Johnson",
+    "position": "CEO, TechStart Inc.",
+    "avatar": "/images/testimonials/89.jpg",
+    "text": "Working with VITOTEAM was the best decision we made for our corporate event. The team was incredibly organized, creative, and attentive to every detail. Everything ran smoothly, and our guests were truly impressed. Highly recommend!"
+  },
+  {
+    "id": 2,
+    "name": "Michael Chen",
+    "position": "Marketing Director, GrowthCo",
+    "avatar": "/images/testimonials/32.jpg",
+    "text": "VITOTEAM helped us organize a product launch event, and the result exceeded all expectations. Their ideas, planning, and execution were top-notch. We received so many compliments from attendees!"
+  },
+  {
+    "id": 3,
+    "name": "Elena Petrova",
+    "position": "Founder, EcoVentures",
+    "avatar": "/images/testimonials/71.jpg",
+    "text": "From the first meeting to the final moments of the event, agency handled everything perfectly. Their communication was clear, and they made the whole process easy and enjoyable. We will definitely work with them again."
+  },
+  {
+    "id": 4,
+    "name": "James Williams",
+    "position": "COO, FinanceHub",
+    "avatar": "/images/testimonials/97.jpg",
+    "text": "Event agency truly cares about their clients. Every small detail was considered, and the event looked stunning. It was a pleasure collaborating with such a dedicated and talented group of professionals."
+  },
+  {
+    "id": 5,
+    "name": "Clark Johnson",
+    "position": "Head of Product, NordTech",
+    "avatar": "/images/testimonials/82.jpg",
+    "text": "Our celebration turned out even better than we imagined. The atmosphere, organization, and overall experience were fantastic. The team went above and beyond to make sure everything was perfect."
+  },
+  {
+    "id": 6,
+    "name": "David Park",
+    "position": "CTO, DataFlow Systems",
+    "avatar": "/images/testimonials/88.jpg",
+    "text": "If you’re looking for a reliable and creative event agency, VITOTEAM is the one. They bring fresh ideas, great energy, and flawless execution. We couldn’t be happier with the results."
+  }
+]

@@ -1,41 +1,28 @@
 <script>
 	import { onMount, tick } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
+	import testimonials from '$lib/data/testimonials.json';
 
-	let showLogo = false;
-	let showAbout = false;
-	let showLetters = false;
-	let showProjects = false;
-	let aboutSection;
-	let lettersSection;
-	let projectsSection;
-	let expandedLetter = null;
-	let isTransitioning = false;
-	let isMobile = false;
-
+	// ── Props ────────────────────────────────────────────────────
 	export let data;
 	const projects = data?.projects || [];
 
-	const letters = [
-		'/images/letters/letter1.png',
-		'/images/letters/letter2.png',
-		'/images/letters/letter3.png',
-		'/images/letters/letter4.png',
-		'/images/letters/letter6.png'
-	];
-	const extendedLetters = [...letters, ...letters, ...letters];
-	let current = letters.length;
-	let interval;
-	let slidesPerView = 3;
-	let sliderContainer;
-	let sliderEl;
+	// ── Visibility flags ─────────────────────────────────────────
+	let showLogo         = false;
+	let showAbout        = false;
+	let showProjects     = false;
+	let showTestimonials = false;
 
-	let startX = 0;
-	let currentX = 0;
-	let isDragging = false;
-	const TRANSITION_DURATION = 500;
-	let visibleProjects;
+	// ── Section refs ─────────────────────────────────────────────
+	let aboutSection;
+	let projectsSection;
+	let testimonialsSection;
 
+	// ── State ────────────────────────────────────────────────────
+	let isMobile = false;
+	$: visibleProjects = isMobile ? projects.slice(0, 3) : projects;
+
+	// ── Helpers ──────────────────────────────────────────────────
 	function debounce(fn, delay) {
 		let timeout;
 		return (...args) => {
@@ -44,153 +31,97 @@
 		};
 	}
 
-	$: visibleProjects = isMobile ? projects.slice(0, 3) : projects;
-
-	function updateSlidesPerView() {
+	function updateIsMobile() {
 		if (typeof window === 'undefined') return;
 		isMobile = window.innerWidth < 768;
-		if (window.innerWidth < 640) slidesPerView = 1;
-		else if (window.innerWidth < 1024) slidesPerView = 2;
-		else slidesPerView = 3;
 	}
 
-	const debouncedUpdate = debounce(updateSlidesPerView, 100);
+	const debouncedUpdateIsMobile = debounce(updateIsMobile, 100);
 
-	function onPointerDown(e) {
-		isDragging = true;
-		startX = e.clientX || e.touches?.[0]?.clientX;
-		e.preventDefault();
+	function setupObserver(el, onIntersect, threshold = 0.2) {
+		if (!el) return null;
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						onIntersect();
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold }
+		);
+		observer.observe(el);
+		return observer;
 	}
 
-	function onPointerMove(e) {
-		if (!isDragging) return;
-		currentX = e.clientX || e.touches?.[0]?.clientX;
-	}
-
-	function onPointerUp() {
-		if (!isDragging) return;
-		const diff = currentX - startX;
-		const threshold = 50;
-
-		if (Math.abs(diff) > threshold) {
-			if (diff > 0) prev();
-			else next();
-		}
-
-		isDragging = false;
-		startX = 0;
-		currentX = 0;
-	}
-
-	function prev() {
-		if (isTransitioning) return;
-		isTransitioning = true;
-		current = (current - 1 + extendedLetters.length) % extendedLetters.length;
-
-		setTimeout(() => {
-			if (current < letters.length) {
-				current += letters.length;
-				resetSliderTransform();
-			}
-			isTransitioning = false;
-		}, TRANSITION_DURATION);
-	}
-
-	function next() {
-		if (isTransitioning) return;
-		isTransitioning = true;
-		current = (current + 1) % extendedLetters.length;
-
-		setTimeout(() => {
-			if (current >= letters.length * 2) {
-				current -= letters.length;
-				resetSliderTransform();
-			}
-			isTransitioning = false;
-		}, TRANSITION_DURATION);
-	}
-
-	function resetSliderTransform() {
-		if (sliderEl) {
-			sliderEl.style.transition = 'none';
-			sliderEl.style.transform = `translateX(-${current * (100 / slidesPerView)}%)`;
-			setTimeout(() => (sliderEl.style.transition = 'transform 0.5s ease'), 50);
-		}
-	}
-
-	function setSlide(i) {
-		if (isTransitioning) return;
-		current = i + letters.length;
-		resetSliderTransform();
-	}
-
-	function getVisibleIndex() {
-		return current % letters.length;
-	}
-
-	function openLetter(letter) {
-		expandedLetter = letter;
-	}
-
-	function closeLetter() {
-		expandedLetter = null;
-	}
-
-	function pauseSlider() {
-		if (interval) {
-			clearInterval(interval);
-			interval = null;
-		}
-	}
-
-	function resumeSlider() {
-		if (!interval) {
-			interval = setInterval(next, 3000);
-		}
-	}
-
+	// ── Lifecycle ────────────────────────────────────────────────
 	onMount(async () => {
 		showLogo = true;
-		debouncedUpdate();
-		window.addEventListener('resize', debouncedUpdate);
+		updateIsMobile();
+		window.addEventListener('resize', debouncedUpdateIsMobile);
 
 		await tick();
 
-		const setupObserver = (el, onIntersect) => {
-			if (!el) return null;
-			const obs = new IntersectionObserver(
-				(entries) => {
-					entries.forEach((entry) => {
-						if (entry.isIntersecting) {
-							onIntersect();
-							obs.unobserve(entry.target);
-						}
-					});
-				},
-				{ threshold: 0.3 }
-			);
-			obs.observe(el);
-			return obs;
-		};
-
-		const aboutObserver = setupObserver(aboutSection, () => (showAbout = true));
-		const lettersObserver = setupObserver(lettersSection, () => (showLetters = true));
-		const projectsObserver = setupObserver(projectsSection, () => (showProjects = true));
-
-		interval = setInterval(next, 3000);
+		const observers = [
+			setupObserver(aboutSection,        () => (showAbout = true)),
+			setupObserver(projectsSection,     () => (showProjects = true)),
+			setupObserver(testimonialsSection, () => (showTestimonials = true), 0.1),
+		];
 
 		return () => {
-			if (interval) clearInterval(interval);
-			window.removeEventListener('resize', debouncedUpdate);
-			[aboutObserver, lettersObserver, projectsObserver].forEach((obs) => obs?.disconnect());
+			window.removeEventListener('resize', debouncedUpdateIsMobile);
+			observers.forEach((obs) => obs?.disconnect());
 		};
 	});
+
+	// ── Services data ─────────────────────────────────────────────
+	const topCards = [
+		{
+			img: 'cards/card1.png',
+			alt: 'Full-Cycle Event Production',
+			title: 'Full-Cycle Event Production',
+			items: ['Concept → flawless execution', 'Premium AV, lighting & stage design', 'Immersive theming & décor'],
+			icon: `<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>`
+		},
+		{
+			img: 'cards/card2.png',
+			alt: 'Corporate & Private Events',
+			title: 'Corporate & Private Events',
+			items: ['Conferences & product launches', 'Incentive trips & team-building', 'Gala dinners & private celebrations'],
+			icon: `<rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M8 18h8M12 13v5"/>`
+		},
+		{
+			img: 'cards/card3.png',
+			alt: 'Cross-Cultural & MICE',
+			title: 'Cross-Cultural & MICE',
+			items: ['Russia ↔ India delegate support', 'Full logistics & hospitality', 'Cultural bridging & VIP handling'],
+			icon: `<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2v20"/>`
+		}
+	];
+
+	const bottomCards = [
+		{
+			img: 'cards/card4.png',
+			alt: 'VIP & Concierge',
+			title: 'VIP & Concierge',
+			items: ['Ultra-premium guest experience', 'Private transfers & logistics', 'Exclusive cultural immersions'],
+			icon: `<path d="M12 2l3 7h7l-5.5 4.2L18 21l-6-4-6 4 1.5-7.8L2 9h7z"/>`
+		},
+		{
+			img: 'cards/card5.png',
+			alt: 'Creative Direction & Art',
+			title: 'Creative Direction & Art',
+			items: ['Artist & talent curation', 'Concept & visual storytelling', 'Bespoke entertainment programs'],
+			icon: `<circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/>`
+		}
+	];
 </script>
 
-<!-- Hero Section -->
+<!-- ── Hero ──────────────────────────────────────────────────────── -->
 <section
 	id="HeroSection"
-	class="relative flex h-screen w-full items-center justify-center overflow-hidden"
+	class="relative flex h-screen min-h-[560px] w-full items-center justify-center overflow-hidden"
 >
 	<div
 		class="absolute inset-0 bg-cover bg-center"
@@ -204,374 +135,270 @@
 				src="/images/Logotype.png"
 				alt="VITO EVENTS"
 				loading="lazy"
-				class="w-44 drop-shadow-lg sm:w-52 md:w-60 lg:w-68"
+				class="w-36 drop-shadow-lg sm:w-52 md:w-64 lg:w-72 xl:w-80"
 				in:fade={{ duration: 800 }}
-				on:error={(e) => console.warn('Failed to load logo')}
+				on:error={() => console.warn('Failed to load logo')}
 			/>
 		{/if}
 	</div>
 </section>
 
+<!-- ── About ─────────────────────────────────────────────────────── -->
 <section
-  bind:this={aboutSection}
-  id="AboutUsSection"
-  class="flex w-full flex-col items-center justify-center bg-white px-6 py-20 md:flex-row md:items-center md:justify-between md:gap-x-12 lg:gap-x-20 md:px-12 md:py-28"
+	bind:this={aboutSection}
+	id="AboutUsSection"
+	class="flex w-full flex-col items-center bg-white px-6 py-16
+	       sm:py-20 md:py-24 lg:py-28 xl:py-36"
 >
-  {#if showAbout}
-    <!-- Фото слева -->
-    <div
-      class="mb-10 md:mb-0 md:w-5/12 lg:w-2/5 flex justify-center md:justify-end"
-      in:fly={{ x: -60, y: 0, duration: 900, delay: 100 }}
-    >
-      <img
-        src="/images/event.jpg"
-        alt="event"
-        loading="lazy"
-        class="object-cover rounded-2xl shadow-lg 
-               h-64 w-64 
-               sm:h-72 sm:w-72 
-               md:h-80 md:w-80 
-               lg:h-96 lg:w-96 
-               transition-all duration-300 
-               hover:shadow-xl hover:scale-[1.02]"
-        on:error={(e) => console.warn('Failed to load about image')}
-      />
-    </div>
+	{#if showAbout}
+		<div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-10
+		            md:flex-row md:items-center md:gap-x-12 lg:gap-x-16 xl:gap-x-24">
 
-    <!-- Текст справа -->
-    <div
-      class="flex flex-col items-start md:items-start text-left md:w-7/12 lg:w-3/5 max-w-3xl"
-      in:fly={{ x: 60, y: 0, duration: 900, delay: 300 }}
-    >
-      <h2 class="mb-6 sm:mb-8 text-3xl font-semibold text-[#252728] sm:text-4xl md:text-4xl lg:text-5xl leading-tight">
-        Global Experience
-        <br class="hidden sm:inline" />
-        <span class="text-[#eb5b25]">Local Soul</span> 
-      </h2>
-      <p class="text-base leading-relaxed text-[#616060] sm:text-lg md:text-xl lg:text-[20px] text-justify">
-        We don’t just organize events — we create unforgettable experiences. With decades of expertise, we deliver precision, passion, and excellence in every detail: from project management and production to premium client service. We put our heart into every project.
-        <br class="my-4 sm:my-6" />
-        Now, we’re bringing this passion to India. Our new branch in New Delhi marks an exciting new chapter — sharing our expertise with international and local brands. We help you tell your story, connect across cultures, and impress with world-class quality. If you’re looking for more than an organizer — a true partner who cares — we’re here to make it happen.
-      </p>
-    </div>
-  {/if}
-</section>
-
-<section class="py-20 md:py-28 bg-white">
-  <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-16 md:mb-20 text-[#252728] tracking-tight">
-      Our Services
-    </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-
-      <!-- Card 1 -->
-      <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden border border-gray-100/60">
-        <div class="relative h-64 overflow-hidden">
-          <img
-            src="cards/card1.png"
-            alt="Full-Cycle Event Management"
-            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500"></div>
-          
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="p-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 group-hover:scale-110 group-hover:bg-[#EB5B25]/80 transition-all duration-500">
-              <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                <line x1="16" y1="2" x2="16" y2="6" />
-                <line x1="8" y1="2" x2="8" y2="6" />
-                <line x1="3" y1="10" x2="21" y2="10" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-8 flex flex-col">
-          <h3 class="text-2xl font-semibold text-[#252728] mb-5 group-hover:text-[#EB5B25] transition-colors duration-400">
-            Full-Cycle Event Production
-          </h3>
-          <ul class="space-y-3 text-[#616060] text-[15px] leading-relaxed">
-            <li>• Concept → flawless execution</li>
-            <li>• Premium AV, lighting & stage design</li>
-            <li>• Immersive theming & décor</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden border border-gray-100/60">
-        <div class="relative h-64 overflow-hidden">
-          <img
-            src="cards/card2.png"
-            alt="Corporate & Private Events"
-            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500"></div>
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="p-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 group-hover:scale-110 group-hover:bg-[#EB5B25]/80 transition-all duration-500">
-              <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="4" y="4" width="16" height="16" rx="2" />
-                <circle cx="12" cy="10" r="3" />
-                <path d="M8 18h8 M12 13v5" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-8 flex flex-col">
-          <h3 class="text-2xl font-semibold text-[#252728] mb-5 group-hover:text-[#EB5B25] transition-colors duration-400">
-            Corporate & Private Events
-          </h3>
-          <ul class="space-y-3 text-[#616060] text-[15px] leading-relaxed">
-            <li>• Conferences & product launches</li>
-            <li>• Incentive trips & team-building</li>
-            <li>• Gala dinners & private celebrations</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden border border-gray-100/60">
-        <div class="relative h-64 overflow-hidden">
-          <img
-            src="cards/card3.png"
-            alt="Cross-Cultural & MICE"
-            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500"></div>
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="p-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 group-hover:scale-110 group-hover:bg-[#EB5B25]/80 transition-all duration-500">
-              <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M2 12h20 M12 2v20" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-8 flex flex-col">
-          <h3 class="text-2xl font-semibold text-[#252728] mb-5 group-hover:text-[#EB5B25] transition-colors duration-400">
-            Cross-Cultural & MICE
-          </h3>
-          <ul class="space-y-3 text-[#616060] text-[15px] leading-relaxed">
-            <li>• Russia ↔ India delegate support</li>
-            <li>• Full logistics & hospitality</li>
-            <li>• Cultural bridging & VIP handling</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Две нижние карточки – центрированные -->
-      <div class="md:col-span-2 lg:col-span-3 flex justify-center">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-10 max-w-4xl w-full">
-
-          <!-- Card 4 -->
-          <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden border border-gray-100/60">
-            <div class="relative h-64 overflow-hidden">
-              <img
-                src="cards/card4.png"
-                alt="VIP & Concierge"
-                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500"></div>
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="p-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 group-hover:scale-110 group-hover:bg-[#EB5B25]/80 transition-all duration-500">
-                  <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M12 2l3 7h7l-5.5 4.2L18 21l-6-4-6 4 1.5-7.8L2 9h7z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <div class="p-8 flex flex-col">
-              <h3 class="text-2xl font-semibold text-[#252728] mb-5 group-hover:text-[#EB5B25] transition-colors duration-400">
-                VIP & Concierge
-              </h3>
-              <ul class="space-y-3 text-[#616060] text-[15px] leading-relaxed">
-                <li>• Ultra-premium guest experience</li>
-                <li>• Private transfers & logistics</li>
-                <li>• Exclusive cultural immersions</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Card 5 -->
-          <div class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 overflow-hidden border border-gray-100/60">
-            <div class="relative h-64 overflow-hidden">
-              <img
-                src="cards/card5.png"
-                alt="Art & Creative Direction"
-                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500"></div>
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="p-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 group-hover:scale-110 group-hover:bg-[#EB5B25]/80 transition-all duration-500">
-                  <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <div class="p-8 flex flex-col">
-              <h3 class="text-2xl font-semibold text-[#252728] mb-5 group-hover:text-[#EB5B25] transition-colors duration-400">
-                Creative Direction & Art
-              </h3>
-              <ul class="space-y-3 text-[#616060] text-[15px] leading-relaxed">
-                <li>• Artist & talent curation</li>
-                <li>• Concept & visual storytelling</li>
-                <li>• Bespoke entertainment programs</li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Projects Section -->
-<section bind:this={projectsSection} class="bg-[#0E1113] px-6 py-16">
-	{#if showProjects}
-		<div in:fly={{ y: 50, duration: 1000 }}>
-			<div class="mb-8 text-center">
-				<h2 class="mb-2 text-3xl font-medium text-white sm:text-4xl md:text-5xl">Our projects</h2>
+			<!-- Photo -->
+			<div
+				class="flex w-full justify-center md:w-5/12 lg:w-2/5"
+				in:fly={{ x: -50, duration: 900, delay: 100 }}
+			>
+				<img
+					src="/images/event.jpg"
+					alt="Vito Events"
+					loading="lazy"
+					class="h-64 w-64 rounded-2xl object-cover shadow-lg transition-all duration-300
+					       hover:scale-[1.02] hover:shadow-xl
+					       sm:h-80 sm:w-80 md:h-80 md:w-80 lg:h-96 lg:w-96 xl:h-[28rem] xl:w-[28rem]"
+					on:error={() => console.warn('Failed to load about image')}
+				/>
 			</div>
 
-			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-				{#each visibleProjects as project}
-					<a
-						href={`/projects/${project.slug}`}
-						class="group relative block overflow-hidden rounded-2xl shadow-lg"
-					>
+			<!-- Text -->
+			<div
+				class="flex w-full flex-col items-start md:w-7/12 lg:w-3/5"
+				in:fly={{ x: 50, duration: 900, delay: 250 }}
+			>
+				<h2 class="mb-4 text-2xl font-semibold leading-tight text-[#252728]
+				           sm:mb-6 sm:text-3xl lg:text-4xl xl:text-5xl">
+					Global Experience
+					<br />
+					<span class="text-[#eb5b25]">Local Soul</span>
+				</h2>
+				<p class="max-w-lg text-sm leading-relaxed text-[#616060]
+				          sm:text-base lg:text-lg xl:max-w-xl xl:text-xl">
+					We don't just organize events — we create unforgettable experiences. With decades of
+					expertise, we deliver precision, passion, and excellence in every detail: from project
+					management and production to premium client service. We put our heart into every project.
+				</p>
+				<p class="mt-4 max-w-lg text-sm leading-relaxed text-[#616060]
+				          sm:text-base lg:text-lg xl:max-w-xl xl:text-xl">
+					Now, we're bringing this passion to India. Our new branch in New Delhi marks an exciting
+					new chapter — sharing our expertise with international and local brands. We help you tell
+					your story, connect across cultures, and impress with world-class quality. If you're
+					looking for more than an organizer — a true partner who cares — we're here to make it happen.
+				</p>
+			</div>
+
+		</div>
+	{/if}
+</section>
+
+<!-- ── Services ──────────────────────────────────────────────────── -->
+<section class="bg-white py-16 sm:py-20 md:py-24 xl:py-32">
+	<div class="mx-auto max-w-7xl px-6 lg:px-8 xl:px-12">
+
+		<h2 class="mb-12 text-center text-2xl font-medium text-[#252728]
+		           sm:text-3xl md:mb-16 lg:text-4xl xl:mb-20 xl:text-5xl">
+			Our Services
+		</h2>
+
+		<!-- Top 3 cards -->
+		<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 xl:gap-10">
+			{#each topCards as card}
+				<div class="group overflow-hidden rounded-2xl border border-gray-100/60 bg-white shadow-md
+				            transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+					<div class="relative h-52 overflow-hidden sm:h-56 md:h-64 xl:h-72">
 						<img
-							src={project.src}
-							alt={project.alt}
-							loading="lazy"
-							class="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+							src={card.img}
+							alt={card.alt}
+							class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
 						/>
-						<div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/50"></div>
-						<div class="absolute bottom-4 left-6 font-['Okta_Neue'] text-white md:text-2xl">
-							<div class="text-sm font-normal">{project.type}</div>
-							<div class="text-xl font-medium md:text-2xl">{project.title}</div>
+						<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent
+						            opacity-60 transition-opacity duration-500 group-hover:opacity-40"></div>
+						<div class="absolute inset-0 flex items-center justify-center">
+							<div class="rounded-full border border-white/20 bg-white/10 p-4 backdrop-blur-sm
+							            transition-all duration-500 group-hover:scale-110 group-hover:bg-[#EB5B25]/80
+							            xl:p-5">
+								<svg class="h-9 w-9 text-white xl:h-11 xl:w-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+									{@html card.icon}
+								</svg>
+							</div>
 						</div>
+					</div>
+					<div class="p-6 xl:p-8">
+						<h3 class="mb-3 text-lg font-semibold text-[#252728] transition-colors duration-300
+						           group-hover:text-[#EB5B25] sm:text-xl xl:text-2xl">
+							{card.title}
+						</h3>
+						<ul class="space-y-2 text-sm leading-relaxed text-[#616060] xl:text-base xl:space-y-3">
+							{#each card.items as item}
+								<li>• {item}</li>
+							{/each}
+						</ul>
+					</div>
+				</div>
+			{/each}
+		</div>
+
+		<!-- Bottom 2 cards — centered -->
+		<div class="mt-6 flex justify-center lg:mt-8 xl:mt-10">
+			<div class="grid w-full grid-cols-1 gap-6 sm:max-w-2xl sm:grid-cols-2 lg:gap-8 xl:max-w-4xl xl:gap-10">
+				{#each bottomCards as card}
+					<div class="group overflow-hidden rounded-2xl border border-gray-100/60 bg-white shadow-md
+					            transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+						<div class="relative h-52 overflow-hidden sm:h-56 md:h-64 xl:h-72">
+							<img
+								src={card.img}
+								alt={card.alt}
+								class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+							/>
+							<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent
+							            opacity-60 transition-opacity duration-500 group-hover:opacity-40"></div>
+							<div class="absolute inset-0 flex items-center justify-center">
+								<div class="rounded-full border border-white/20 bg-white/10 p-4 backdrop-blur-sm
+								            transition-all duration-500 group-hover:scale-110 group-hover:bg-[#EB5B25]/80
+								            xl:p-5">
+									<svg class="h-9 w-9 text-white xl:h-11 xl:w-11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+										{@html card.icon}
+									</svg>
+								</div>
+							</div>
+						</div>
+						<div class="p-6 xl:p-8">
+							<h3 class="mb-3 text-lg font-semibold text-[#252728] transition-colors duration-300
+							           group-hover:text-[#EB5B25] sm:text-xl xl:text-2xl">
+								{card.title}
+							</h3>
+							<ul class="space-y-2 text-sm leading-relaxed text-[#616060] xl:text-base xl:space-y-3">
+								{#each card.items as item}
+									<li>• {item}</li>
+								{/each}
+							</ul>
+						</div>
+					</div>
+				{/each}
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<!-- ── Projects ───────────────────────────────────────────────────── -->
+<section bind:this={projectsSection} class="bg-[#0E1113] px-6 py-16 sm:py-20 md:py-24 xl:py-32">
+	{#if showProjects}
+		<div in:fly={{ y: 40, duration: 800 }}>
+
+			<h2 class="mb-10 text-center text-2xl font-medium text-white
+			           sm:text-3xl md:mb-14 lg:text-4xl xl:mb-16 xl:text-5xl">
+				Our Projects
+			</h2>
+
+			<div class="mx-auto max-w-7xl xl:max-w-[90rem]">
+				<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:gap-7">
+					{#each visibleProjects as project}
+						
+							<a href={`/projects/${project.slug}`}
+							class="group relative block overflow-hidden rounded-xl shadow-md
+							       transition-shadow duration-300 hover:shadow-2xl"
+						>
+							<img
+								src={project.src}
+								alt={project.alt}
+								loading="lazy"
+								class="h-64 w-full object-cover transition-transform duration-500
+								       group-hover:scale-105 sm:h-72 md:h-80 xl:h-96"
+							/>
+							<div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+							<div class="absolute bottom-4 left-5 xl:bottom-6 xl:left-7">
+								<p class="text-xs font-normal uppercase tracking-widest text-white/70 xl:text-sm">
+									{project.type}
+								</p>
+								<p class="mt-0.5 text-base font-medium text-white sm:text-lg xl:text-xl">
+									{project.title}
+								</p>
+							</div>
+						</a>
+					{/each}
+				</div>
+
+				<div class="mt-10 flex justify-center xl:mt-14">
+					
+						<a href="/projects"
+						class="rounded-lg border border-white/60 px-8 py-3 text-sm font-medium text-white
+						       transition-all duration-300 hover:bg-white hover:text-[#0E1113]
+						       sm:text-base xl:px-10 xl:py-4 xl:text-lg"
+					>
+						All projects
 					</a>
+				</div>
+			</div>
+
+		</div>
+	{/if}
+</section>
+
+<!-- ── Testimonials ───────────────────────────────────────────────── -->
+<section
+	bind:this={testimonialsSection}
+	id="TestimonialsSection"
+	class="bg-white px-6 py-16 sm:py-20 md:py-24 xl:py-32"
+>
+	{#if showTestimonials}
+		<div in:fly={{ y: 40, duration: 800 }}>
+
+			<h2 class="mb-3 text-center text-2xl font-medium text-[#0E1113]
+			           sm:text-3xl lg:text-4xl xl:text-5xl">
+				Clients Testimonials
+			</h2>
+			<div class="mx-auto mb-12 h-0.5 w-16 rounded-full bg-[#EB5B25]
+			            sm:mb-14 sm:w-20 xl:mb-16 xl:w-24"></div>
+
+			<div class="mx-auto grid max-w-6xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3
+			            xl:max-w-[90rem] xl:gap-8">
+				{#each testimonials as t, i}
+					<div
+						in:fly={{ y: 30, duration: 500, delay: i * 80 }}
+						class="flex flex-col rounded-xl border border-gray-100 bg-white p-5 sm:p-6 xl:p-8
+						       shadow-[0_2px_16px_rgba(0,0,0,0.06)] transition-shadow duration-300
+						       hover:shadow-[0_6px_24px_rgba(235,91,37,0.12)]"
+					>
+						<svg class="mb-3 h-7 w-7 text-[#EB5B25] opacity-30 xl:h-9 xl:w-9" viewBox="0 0 24 24" fill="currentColor">
+							<path d="M7.17 17c.51 0 .98-.29 1.2-.74l1.42-2.84A1 1 0 0 0 9.5 12H7V7H2v5.5C2 15.54 4.46 17 7.17 17zm11 0c.51 0 .98-.29 1.2-.74l1.42-2.84A1 1 0 0 0 20.5 12H18V7h-5v5.5c0 3.04 2.46 4.5 5.17 4.5z"/>
+						</svg>
+
+						<p class="mb-5 flex-grow text-sm leading-relaxed text-gray-500 xl:text-base xl:leading-loose">
+							{t.text}
+						</p>
+
+						<div class="mb-4 h-px bg-gray-100"></div>
+
+						<div class="flex items-center gap-3">
+							<div class="h-9 w-9 flex-shrink-0 overflow-hidden rounded-full border border-[#EB5B25]/25
+							            xl:h-12 xl:w-12">
+								{#if t.avatar}
+									<img src={t.avatar} alt={t.name} class="h-full w-full object-cover" />
+								{:else}
+									<div class="flex h-full w-full items-center justify-center bg-[#EB5B25]/10 text-xs font-bold text-[#EB5B25] xl:text-sm">
+										{t.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+									</div>
+								{/if}
+							</div>
+							<div>
+								<p class="text-sm font-semibold leading-tight text-[#0E1113] xl:text-base">{t.name}</p>
+								<p class="mt-0.5 text-xs text-gray-400 xl:text-sm">{t.position}</p>
+							</div>
+						</div>
+					</div>
 				{/each}
 			</div>
 
-			<!-- Кнопка "Показать все проекты" -->
-			<div class="mt-10 flex justify-center">
-				<a
-					href="/projects"
-					class="rounded-xl border border-white px-8 py-4 text-lg font-medium text-white transition hover:bg-white hover:text-black"
-				>
-					All projects
-				</a>
-			</div>
 		</div>
 	{/if}
 </section>
-
-<!-- Letters Section -->
-<section
-	bind:this={lettersSection}
-	id="CharityLettersSection"
-	class="flex flex-col items-center bg-white px-6 py-24"
->
-	{#if showLetters}
-		<div in:fly={{ y: 50, duration: 1000 }}>
-			<h2 class="mb-10 text-center text-3xl font-medium text-[#0E1113] sm:text-4xl md:text-5xl">
-				Clients testimonials
-			</h2>
-			<div class="mx-auto mb-10 h-1 w-32 rounded bg-[#EB5B25]"></div>
-
-			<div class="relative w-full max-w-6xl">
-				<div
-					bind:this={sliderContainer}
-					class="overflow-hidden"
-					on:pointerdown={onPointerDown}
-					on:pointermove={onPointerMove}
-					on:pointerup={onPointerUp}
-					on:touchstart={onPointerDown}
-					on:touchmove={onPointerMove}
-					on:touchend={onPointerUp}
-					on:mouseenter={pauseSlider}
-					on:mouseleave={resumeSlider}
-					role="region"
-					aria-label="Слайдер с отзывами клиентов"
-				>
-					<div
-						bind:this={sliderEl}
-						class="slider-track flex transition-transform duration-500 ease-in-out"
-						style="transform: translateX(-{current * (100 / slidesPerView)}%);"
-					>
-						{#each extendedLetters as letter, i}
-							<div class="w-full flex-shrink-0 p-2 sm:w-1/2 lg:w-1/3">
-								<img
-									src={letter}
-									alt="Благодарственное письмо {(i % letters.length) + 1}"
-									loading="lazy"
-									class="mx-auto h-85 w-auto transform cursor-pointer rounded-lg border border-[#EB5B25] object-contain transition-transform duration-500 ease-in-out hover:scale-105 hover:shadow-lg"
-									on:click={() => openLetter(letter)}
-									on:touchend={() => openLetter(letter)}
-									on:error={(e) => console.warn('Failed to load letter:', letter)}
-								/>
-							</div>
-						{/each}
-					</div>
-				</div>
-
-				<!-- Навигационные точки -->
-				<div class="mt-8 mb-10 flex justify-center gap-4">
-					{#each letters as _, i}
-						<button
-							on:click={() => setSlide(i)}
-							class="h-4 w-4 rounded-full transition-colors focus:ring-2 focus:ring-[#EB5B25] focus:outline-none"
-							class:bg-[#EB5B25]={i === getVisibleIndex()}
-							class:bg-gray-300={i !== getVisibleIndex()}
-							aria-label={`Переход к письму ${i + 1}`}
-						/>
-					{/each}
-				</div>
-			</div>
-		</div>
-	{/if}
-</section>
-
-<!-- Letter Modal -->
-{#if expandedLetter}
-	<div
-		class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
-		on:click={closeLetter}
-		on:keydown={(e) => e.key === 'Escape' && closeLetter()}
-		in:fade
-		out:fade
-		role="dialog"
-		aria-label="Просмотр письма"
-		tabindex="0"
-	>
-		<div
-			class="relative flex max-h-[90vh] max-w-[90vw] items-center justify-center overflow-hidden"
-			on:click|stopPropagation
-		>
-			<img
-				src={expandedLetter}
-				alt="Письмо клиента"
-				loading="lazy"
-				class="block max-h-[90vh] max-w-[90vw] rounded-lg object-contain"
-			/>
-			<!-- Кнопка закрытия -->
-			<button
-				class="absolute top-4 right-4 rounded-full bg-black/50 p-2 text-white hover:bg-black focus:outline-none"
-				on:click={closeLetter}
-				aria-label="Закрыть письмо"
-			>
-				✕
-			</button>
-		</div>
-	</div>
-{/if}
