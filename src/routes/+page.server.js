@@ -1,6 +1,6 @@
 // // src/routes/+page.server.js
 // import { error } from '@sveltejs/kit';
-// // import { WP_BASE_URL } from '$env/static/private'; // <-- ВАЖНО
+// import { WP_BASE_URL } from '$env/static/private'; // <-- ВАЖНО
 
 // if (!WP_BASE_URL) {
 // 	console.warn('⚠️ WP_BASE_URL не задан! Установите переменную окружения на Amvera.');
