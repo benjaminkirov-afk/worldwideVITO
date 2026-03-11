@@ -16,7 +16,7 @@
 <svelte:head>
 	<title>VITO | Организация мероприятий</title>
 	<link rel="icon" href="/images/favicon.ico?v=2" />
-	<meta name="description" content="Организация мероприятий" />
+	<meta name="description" content="Events" />
 </svelte:head>
 
 <div class="flex min-h-screen flex-col text-sm sm:text-base">
