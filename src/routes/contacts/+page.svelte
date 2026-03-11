@@ -44,7 +44,7 @@
 					<i class="fas fa-map-marker-alt text-lg text-orange-500" />
 				</div>
 				<a
-					href="https://www.openstreetmap.org/search?query=28.534%2C77.212"
+					href="https://maps.app.goo.gl/wqMjXtPQ4zLVRYst5"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="text-lg md:text-xl font-medium leading-tight transition-colors hover:text-orange-400"
