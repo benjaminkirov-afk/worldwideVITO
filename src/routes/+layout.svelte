@@ -14,7 +14,7 @@
 
 <!-- 🏷️ Head с favicon и дефолтным title -->
 <svelte:head>
-	<title>VITO | Организация мероприятий</title>
+	<title>VITO | Event Agency</title>
 	<link rel="icon" href="/images/favicon.ico?v=2" />
 	<meta name="description" content="Events" />
 </svelte:head>
