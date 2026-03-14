@@ -155,7 +155,7 @@
 		            md:flex-row md:items-center md:gap-x-12 lg:gap-x-16 xl:gap-x-24">
 
 			<!-- Photo -->
-			<div
+			<!-- <div
 				class="flex w-full justify-center md:w-5/12 lg:w-2/5"
 				in:fly={{ x: -50, duration: 900, delay: 100 }}
 			>
@@ -168,7 +168,7 @@
 					       sm:h-80 sm:w-80 md:h-80 md:w-80 lg:h-96 lg:w-96 xl:h-[28rem] xl:w-[28rem]"
 					on:error={() => console.warn('Failed to load about image')}
 				/>
-			</div>
+			</div> -->
 
 			<!-- Text -->
 			<div
