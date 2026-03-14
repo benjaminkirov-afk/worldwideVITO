@@ -183,16 +183,19 @@
 				</h2>
 				<p class="max-w-lg text-sm leading-relaxed text-[#616060]
 				          sm:text-base lg:text-lg xl:max-w-xl xl:text-xl">
-					We don't just organize events — we create unforgettable experiences. With decades of
-					expertise, we deliver precision, passion, and excellence in every detail: from project
-					management and production to premium client service. We put our heart into every project.
+					We are a team of experienced professionals specialising in corporate events of every scale. From planning and project management to production and client service, we deliver a high standard of professionalism at every stage.
 				</p>
 				<p class="mt-4 max-w-lg text-sm leading-relaxed text-[#616060]
 				          sm:text-base lg:text-lg xl:max-w-xl xl:text-xl">
-					Now, we're bringing this passion to India. Our new branch in New Delhi marks an exciting
-					new chapter — sharing our expertise with international and local brands. We help you tell
-					your story, connect across cultures, and impress with world-class quality. If you're
-					looking for more than an organizer — a true partner who cares — we're here to make it happen.
+					We support companies with international exhibitions and forums, delegate management, corporate off-site events, and business programmes. With many years of experience, we deliver projects efficiently without compromising on quality.
+				</p>
+				<p class="mt-4 max-w-lg text-sm leading-relaxed text-[#616060]
+				          sm:text-base lg:text-lg xl:max-w-xl xl:text-xl">
+					With an office in New Delhi, we are well placed to work across the Indian market with both international and local companies.
+				</p>
+				<p class="mt-4 max-w-lg text-sm leading-relaxed text-[#616060]
+				          sm:text-base lg:text-lg xl:max-w-xl xl:text-xl">
+					If you are looking for a reliable partner to deliver events and projects in India, we would be delighted to work with you.
 				</p>
 			</div>
 
