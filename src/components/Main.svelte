@@ -177,9 +177,9 @@
 			>
 				<h2 class="mb-4 text-2xl font-semibold leading-tight text-[#252728]
 				           sm:mb-6 sm:text-3xl lg:text-4xl xl:text-5xl">
-					Global Experience
+					Professional Event Solutions
 					<br />
-					<span class="text-[#eb5b25]">Local Soul</span>
+					<span class="text-[#eb5b25]">Across India</span>
 				</h2>
 				<p class="max-w-lg text-sm leading-relaxed text-[#616060]
 				          sm:text-base lg:text-lg xl:max-w-xl xl:text-xl">
