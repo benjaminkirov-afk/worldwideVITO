@@ -145,62 +145,55 @@
 
 <!-- ── About ─────────────────────────────────────────────────────── -->
 <section
-	bind:this={aboutSection}
-	id="AboutUsSection"
-	class="flex w-full flex-col items-center bg-white px-6 py-16
-	       sm:py-20 md:py-24 lg:py-28 xl:py-36"
+  bind:this={aboutSection}
+  id="AboutUsSection"
+  class="flex w-full flex-col items-center bg-white"
 >
-	{#if showAbout}
-		<div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-10
-		            md:flex-row md:items-center md:gap-x-12 lg:gap-x-16 xl:gap-x-24">
+  {#if showAbout}
+    <!-- Banner Image — full width, fixed banner ratio -->
+    <div
+      class="w-full overflow-hidden"
+      in:fly={{ y: -30, duration: 900, delay: 100 }}
+    >
+      <img
+        src="/images/event.png"
+        alt="Vito Events"
+        loading="lazy"
+        class="w-full object-cover"
+        style="aspect-ratio: 2800 / 800; max-height: 480px;"
+        on:error={() => console.warn('Failed to load about image')}
+      />
+    </div>
 
-			<!-- Photo -->
-			<!-- <div
-				class="flex w-full justify-center md:w-5/12 lg:w-2/5"
-				in:fly={{ x: -50, duration: 900, delay: 100 }}
-			>
-				<img
-					src="/images/event.jpg"
-					alt="Vito Events"
-					loading="lazy"
-					class="h-64 w-64 rounded-2xl object-cover shadow-lg transition-all duration-300
-					       hover:scale-[1.02] hover:shadow-xl
-					       sm:h-80 sm:w-80 md:h-80 md:w-80 lg:h-96 lg:w-96 xl:h-[28rem] xl:w-[28rem]"
-					on:error={() => console.warn('Failed to load about image')}
-				/>
-			</div> -->
+    <!-- Text block — centered -->
+    <div
+      class="mx-auto flex w-full max-w-3xl flex-col items-center px-6 pt-8 pb-8 text-center sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14 xl:pt-16 xl:pb-16"
+    >
+      <h2 class="mb-4 text-2xl font-semibold leading-tight text-[#252728] sm:mb-6 sm:text-3xl lg:text-4xl xl:text-5xl">
+        Professional Event Solutions <br />
+        <span class="text-[#eb5b25]">Across India</span>
+      </h2>
 
-			<!-- Text -->
-			<div
-				class="flex w-full flex-col items-start md:w-7/12 lg:w-3/5"
-				in:fly={{ x: 50, duration: 900, delay: 250 }}
-			>
-				<h2 class="mb-4 text-2xl font-semibold leading-tight text-[#252728]
-				           sm:mb-6 sm:text-3xl lg:text-4xl xl:text-5xl">
-					Professional Event Solutions
-					<br />
-					<span class="text-[#eb5b25]">Across India</span>
-				</h2>
-				<p class="max-w-lg text-sm leading-relaxed text-[#616060]
-				          sm:text-base lg:text-lg xl:max-w-xl xl:text-xl">
-					We are a team of experienced professionals specialising in corporate events of every scale. From planning and project management to production and client service, we deliver a high standard of professionalism at every stage.
-				</p>
-				<p class="mt-4 max-w-lg text-sm leading-relaxed text-[#616060]
-				          sm:text-base lg:text-lg xl:max-w-xl xl:text-xl">
-					We support companies with international exhibitions and forums, delegate management, corporate off-site events, and business programmes. With many years of experience, we deliver projects efficiently without compromising on quality.
-				</p>
-				<p class="mt-4 max-w-lg text-sm leading-relaxed text-[#616060]
-				          sm:text-base lg:text-lg xl:max-w-xl xl:text-xl">
-					With an office in New Delhi, we are well placed to work across the Indian market with both international and local companies.
-				</p>
-				<p class="mt-4 max-w-lg text-sm leading-relaxed text-[#616060]
-				          sm:text-base lg:text-lg xl:max-w-xl xl:text-xl">
-					If you are looking for a reliable partner to deliver events and projects in India, we would be delighted to work with you.
-				</p>
-			</div>
-
-		</div>
-	{/if}
+      <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
+        We are a team of experienced professionals specialising in corporate events of every scale.
+        From planning and project management to production and client service, we deliver a high
+        standard of professionalism at every stage.
+      </p>
+      <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
+        We support companies with international exhibitions and forums, delegate management,
+        corporate off-site events, and business programmes. With many years of experience, we
+        deliver projects efficiently without compromising on quality.
+      </p>
+      <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
+        With an office in New Delhi, we are well placed to work across the Indian market with both
+        international and local companies.
+      </p>
+      <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
+        If you are looking for a reliable partner to deliver events and projects in India, we would
+        be delighted to work with you.
+      </p>
+    </div>
+  {/if}
 </section>
 
 <!-- ── Services ──────────────────────────────────────────────────── -->
