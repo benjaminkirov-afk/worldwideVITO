@@ -56,7 +56,7 @@
 	{/if}
 	{#if project.type}
 		{#if project.customer} | {/if}
-		<span class="font-medium">Type:</span> {project.type}
+		<span class="font-medium">Event Type:</span> {project.type}
 	{/if}
 	{#if project.location}
 		{#if project.customer || project.type} | {/if}
@@ -64,7 +64,7 @@
 	{/if}
 	{#if Number(project.clients) > 0}
 		{#if project.customer || project.type || project.location} | {/if}
-		<span class="font-medium">Members:</span> {project.clients}
+		<span class="font-medium">Guests:</span> {project.clients}
 	{/if}
 </p>
 			</div>
