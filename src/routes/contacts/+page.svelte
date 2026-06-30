@@ -63,10 +63,10 @@
 					<i class="fas fa-envelope text-lg text-orange-500" />
 				</div>
 				<a
-					href="mailto:main@vitoteam.in"
+					href="mailto:vitoteamevents@gmail.com"
 					class="text-2xl md:text-2.5xl font-medium transition-colors hover:text-orange-400"
 				>
-					main@vitoteam.in
+					vitoteamevents@gmail.com
 				</a>
 			</div>
 		</div>
