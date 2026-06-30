@@ -52,7 +52,7 @@
 				<h1 class="text-4xl font-semibold">{project.title}</h1>
 				<p class="mt-4 text-lg opacity-90">
 	{#if project.customer}
-		<span class="font-medium">Customer:</span> {project.customer}
+		<span class="font-medium">Client:</span> {project.customer}
 	{/if}
 	{#if project.type}
 		{#if project.customer} | {/if}
