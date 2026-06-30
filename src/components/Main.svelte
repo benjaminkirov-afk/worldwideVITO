@@ -105,14 +105,14 @@
 			img: 'cards/card4.png',
 			alt: 'VIP & Concierge',
 			title: 'VIP & Concierge',
-			items: ['Ultra-premium guest experience', 'Private transfers & logistics', 'Exclusive cultural immersions'],
+			items: ['Ultra-premium guest experiences', 'Private transfers & logistics', 'Exclusive cultural immersions'],
 			icon: `<path d="M12 2l3 7h7l-5.5 4.2L18 21l-6-4-6 4 1.5-7.8L2 9h7z"/>`
 		},
 		{
 			img: 'cards/card05.jpg',
 			alt: 'Creative Direction & Art',
 			title: 'Creative Direction & Art',
-			items: ['Artist & talent curation', 'Concept & visual storytelling', 'Bespoke entertainment programs'],
+			items: ['Artist & talent curation', 'Concept & visual storytelling', 'Bespoke entertainment programmes'],
 			icon: `<circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/>`
 		}
 	];
@@ -175,18 +175,18 @@
       </h2>
 
       <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
-        We are a team of experienced professionals specialising in corporate events of all scales.
+        We are a team of experienced professionals specialising in corporate events of all sizes.
         From strategic planning and project management to production and on-site execution, we ensure
         precision and consistency at every stage.
       </p>
       <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
         We delivrer international exhibitions and forums, delegate management,
-        programmes, corporate off-site events and tailored business experiences.
-		With years of hands-on expertise, we execute complex projects efficiently
-		maintaining a consistently high level of quality.
+        event programmes, corporate off-site events, and tailored business experiences.
+		With years of hands-on expertise, we execute complex projects efficiently, 
+		while maintaining a consistently high level of quality.
       </p>
       <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
-        Based in New Delhi, we are ideally positioned to operate across the Indian market,
+        Based in New Delhi, we are ideally positioned to operate throughout the Indian market,
 		supporting both international and local clients.
       </p>
       <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
