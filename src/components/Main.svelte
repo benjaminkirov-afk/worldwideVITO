@@ -175,22 +175,23 @@
       </h2>
 
       <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
-        We are a team of experienced professionals specialising in corporate events of every scale.
-        From planning and project management to production and client service, we deliver a high
-        standard of professionalism at every stage.
+        We are a team of experienced professionals specialising in corporate events of all scales.
+        From strategic planning and project management to production and on-site execution, we ensure
+        precision and consistency at every stage.
       </p>
       <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
-        We support companies with international exhibitions and forums, delegate management,
-        corporate off-site events, and business programmes. With many years of experience, we
-        deliver projects efficiently without compromising on quality.
+        We delivrer international exhibitions and forums, delegate management,
+        programmes, corporate off-site events and tailored business experiences.
+		With years of hands-on expertise, we execute complex projects efficiently
+		maintaining a consistently high level of quality.
       </p>
       <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
-        With an office in New Delhi, we are well placed to work across the Indian market with both
-        international and local companies.
+        Based in New Delhi, we are ideally positioned to operate across the Indian market,
+		supporting both international and local clients.
       </p>
       <p class="mt-4 text-sm leading-relaxed text-[#616060] sm:text-base lg:text-lg xl:text-xl">
-        If you are looking for a reliable partner to deliver events and projects in India, we would
-        be delighted to work with you.
+        If you are looking for a reliable partner to deliver impactful events and experiences in India, 
+		we would be delighted to work with you.
       </p>
     </div>
   {/if}
